@@ -25,8 +25,11 @@ Module.register("MMM-MyCalendar", {
 		animationSpeed: 2000,
 		fade: true,
 		urgency: 7,
-		timeFormat: "relative",
-		dateFormat: "MMM Do",
+		useRelativeDates: false,
+		dayOfWeekFormat: "dddd",
+		dateFormat: "MMMM D",
+		timeFormat: "h:mm A",
+		joiningWord: "at",
 		getRelative: 6,
 		fadePoint: 0.25, // Start on 1/4th of the list.
 		hidePrivate: false,
@@ -227,12 +230,7 @@ Module.register("MMM-MyCalendar", {
 				} else if (event.startDate - now < oneDay && event.startDate - now > 0) {
 					timeWrapper.innerHTML = this.capFirst(this.translate("TOMORROW"));
 				} else if (event.startDate - now < 6 * oneDay && event.startDate - now > 0) {
-					// if (this.translate("DAYAFTERTOMORROW") !== "DAYAFTERTOMORROW") {
-					// 	timeWrapper.innerHTML = this.capFirst(this.translate("DAYAFTERTOMORROW"));
-					// } else {
-					// 	timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow());
-					// }
-          timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").format("dddd"));
+          timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").format(this.config.dayOfWeekFormat));
 				} else {
 					/* Check to see if the user displays absolute or relative dates with their events
 					 * Also check to see if an event is happening within an 'urgency' time frameElement
@@ -241,7 +239,7 @@ Module.register("MMM-MyCalendar", {
 					 *
 					 * Note: this needs to be put in its own function, as the whole thing repeats again verbatim
 					 */
-					if (this.config.timeFormat === "absolute") {
+					if (!this.config.useRelativeDates) {
 						if ((this.config.urgency > 1) && (event.startDate - now < (this.config.urgency * oneDay))) {
 							// This event falls within the config.urgency period that the user has set
 							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow());
@@ -261,7 +259,7 @@ Module.register("MMM-MyCalendar", {
 							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow());
 						} else {
 							// Otherwise just say 'Today/Tomorrow at such-n-such time'
-							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").calendar());
+							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").format(this.config.dayOfWeekFormat + " [" + this.config.joiningWord + "] " + this.config.timeFormat));
 						}
 					} else {
 						/* Check to see if the user displays absolute or relative dates with their events
@@ -271,12 +269,12 @@ Module.register("MMM-MyCalendar", {
 						 *
 						 * Note: this needs to be put in its own function, as the whole thing repeats again verbatim
 						 */
-						if (this.config.timeFormat === "absolute") {
+						if (!this.config.useRelativeDates) {
 							if ((this.config.urgency > 1) && (event.startDate - now < (this.config.urgency * oneDay))) {
 								// This event falls within the config.urgency period that the user has set
 								timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow());
 							} else {
-								timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").format(this.config.dateFormat));
+								timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").format(this.config.dateFormat + " [" + this.config.joiningWord + "] " + this.config.timeFormat));
 							}
 						} else {
 							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow());
@@ -286,8 +284,7 @@ Module.register("MMM-MyCalendar", {
 					timeWrapper.innerHTML = this.capFirst(this.translate("RUNNING")) + " " + moment(event.endDate, "x").fromNow(true);
 				}
 			}
-			//timeWrapper.innerHTML += ' - '+ moment(event.startDate,'x').format('lll');
-			//console.log(event);
+
 			timeWrapper.className = "time light";
 
 			eventWrapper.appendChild(timeWrapper);

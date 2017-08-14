@@ -6,6 +6,8 @@ This module displays events from a public .ical calendar. It can combine multipl
 
 ## Using the module
 
+**NOTE: Some configuration parameters have changed.  See below if you are updating from a previous version.**
+
 To use this module, add it to the modules array in the `config/config.js` file:
 ````javascript
 modules: [
@@ -25,6 +27,14 @@ modules: [
 
 The following properties can be configured:
 
+**Note** if you are updating, some of the configuration options have changed, as follows:
+
+*`timeFormat` no longer refers to whether you would like to see 'relative' or 'absolute' dates.  You now use `useRelativeDates` and specifiy either `true` or `false`.
+*`timeFormat` is now used to specify the display format for time (e.g.: `"h:mm A"` for 12 hour time, `"HH:mm"` for 24 hour time, etc.)
+*`dateFormat` is now just used for specifying how date portions of the display should format (e.g.: `"MMMM D"` for January 1, `"DD-MMM"` for 01-Jan, etc.).
+*`dayOfWeekFormat` is new and allows you to specify a format for weekday names (e.g. `"dddd"` for Tuesday, `"ddd"` for Tue, etc.)
+*`joiningWord` is new and allows you to specify the word to be displayed between the day/date and time of the event (e.g.: specify `"at"` for Tuesday `at` 1:15 PM).  If you do not want a joining word, then specify an empty string (i.e.: `""`).
+
 
 | Option                       | Description
 | ---------------------------- | -----------
@@ -38,8 +48,11 @@ The following properties can be configured:
 | `calendars`                  | The list of calendars. <br><br> **Possible values:** An array, see _calendar configuration_ below. <br> **Default value:** _An example calendar._
 | `titleReplace`               | An object of textual replacements applied to the tile of the event. This allow to remove or replace certains words in the title. <br><br> **Example:** `{'Birthday of ' : '', 'foo':'bar'}` <br> **Default value:** `{	"De verjaardag van ": "", "'s birthday": ""	}`
 | `displayRepeatingCountTitle` | Show count title for yearly repeating events (e.g. "X. Birthday", "X. Anniversary") <br><br> **Possible values:** `true` or `false` <br> **Default value:** `false`
-| `dateFormat`                 | Format to use for the date of events (when using absolute dates) <br><br> **Possible values:** See [Moment.js formats](http://momentjs.com/docs/#/parsing/string-format/) <br> **Default value:** `MMM Do` (e.g. Jan 18th)
-| `timeFormat`                 | Display event times as absolute dates, or relative time <br><br> **Possible values:** `absolute` or `relative` <br> **Default value:** `relative`
+| `dayOfWeekFormat`            | Format to use for weekday names. <br><br>**Possible values:** See [Moment.js formats](http://momentjs.com/docs/#/parsing/string-format/)<br> **Default value:** `dddd` (e.g. Tuesday)
+| `timeFormat`                 | Format to use for time display. <br><br>**Possible values:** See [Moment.js formats](http://momentjs.com/docs/#/parsing/string-format/)<br> **Default value:** `h:mm A` (e.g. 1:15 PM)
+| `dateFormat`                 | Format to use for the date of events (when using absolute dates) <br><br> **Possible values:** See [Moment.js formats](http://momentjs.com/docs/#/parsing/string-format/) <br> **Default value:** `MMMM D` (e.g. January 18)
+| `joiningWord`                | Word to display between the day/date and the time of the event (e.g.: Tuesday `at` 1:15 PM). If you do not want one, you need to explicitly specify an epmty string (i.e.: `""`)<br> **Default value:** `at`
+| `useRelativeDates`           | Display event times as relative time (`true`) or absolute dates (`false`)<br><br> **Possible values:** `true` or `false` <br> **Default value:** `false`<br>**NOTE** This used to be named `timeFormat`, but I felt that din't make a lot of sense.  So `timeFormat` is now used to specify the format for time display (as one would expect).
 | `getRelative`                | How much time (in hours) should be left until calendar events start getting relative? <br><br> **Possible values:** `0` (events stay absolute) - `48` (48 hours before the event starts) <br> **Default value:** `6`
 | `urgency`                    | When using a timeFormat of `absolute`, the `urgency` setting allows you to display events within a specific time frame as `relative`. This allows events within a certain time frame to be displayed as relative (in xx days) while others are displayed as absolute dates <br><br> **Possible values:** a positive integer representing the number of days for which you want a relative date, for example `7` (for 7 days) <br><br> **Default value:** `7`
 | `broadcastEvents`            | If this property is set to true, the calendar will broadcast all the events to all other modules with the notification message: `CALENDAR_EVENTS`. The event objects are stored in an array and contain the following fields: `title`, `startDate`, `endDate`, `fullDayEvent`, `location` and `geo`. <br><br> **Possible values:** `true`, `false` <br><br> **Default value:** `true`
