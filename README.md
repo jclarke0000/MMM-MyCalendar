@@ -29,11 +29,11 @@ The following properties can be configured:
 
 **Note** if you are updating, some of the configuration options have changed, as follows:
 
-*`timeFormat` no longer refers to whether you would like to see 'relative' or 'absolute' dates.  You now use `useRelativeDates` and specifiy either `true` or `false`.
-*`timeFormat` is now used to specify the display format for time (e.g.: `"h:mm A"` for 12 hour time, `"HH:mm"` for 24 hour time, etc.)
-*`dateFormat` is now just used for specifying how date portions of the display should format (e.g.: `"MMMM D"` for January 1, `"DD-MMM"` for 01-Jan, etc.).
-*`dayOfWeekFormat` is new and allows you to specify a format for weekday names (e.g. `"dddd"` for Tuesday, `"ddd"` for Tue, etc.)
-*`joiningWord` is new and allows you to specify the word to be displayed between the day/date and time of the event (e.g.: specify `"at"` for Tuesday `at` 1:15 PM).  If you do not want a joining word, then specify an empty string (i.e.: `""`).
+* `timeFormat` no longer refers to whether you would like to see 'relative' or 'absolute' dates.  You now use `useRelativeDates` and specifiy either `true` or `false`.
+* `timeFormat` is now used to specify the display format for time (e.g.: `"h:mm A"` for 12 hour time, `"HH:mm"` for 24 hour time, etc.)
+* `dateFormat` is now just used for specifying how date portions of the display should format (e.g.: `"MMMM D"` for January 1, `"DD-MMM"` for 01-Jan, etc.).
+* `dayOfWeekFormat` is new and allows you to specify a format for weekday names (e.g. `"dddd"` for Tuesday, `"ddd"` for Tue, etc.)
+* `joiningWord` is new and allows you to specify the word to be displayed between the day/date and time of the event (e.g.: specify `"at"` for Tuesday `at` 1:15 PM).  If you do not want a joining word, then specify an empty string (i.e.: `""`).
 
 
 | Option                       | Description
