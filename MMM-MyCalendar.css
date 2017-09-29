@@ -1,3 +1,7 @@
+.MMM-MyCalendar {
+  max-width: 500px;
+}
+
 .MMM-MyCalendar .symbol {
   padding-left: 0;
   padding-right: 10px;
@@ -21,10 +25,21 @@
   text-align: right;
 }
 
-.MMM-MyCalendar table.small {
-  width: 300px;
+
+.MMM-MyCalendar table {
   table-layout: fixed;
+  border-collapse:collapse;
+  width: 100%;
 }
+
+.MMM-MyCalendar table td {
+  line-height: 1.75;
+}
+
+.MMM-MyCalendar table tr {
+  border-bottom: solid 1px #222;
+}
+
 
 .MMM-MyCalendar .calendar-event {
   position: relative;
@@ -86,3 +101,4 @@
   left: 0px;
   fill: currentColor;
 }
+
