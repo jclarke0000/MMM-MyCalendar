@@ -4,6 +4,13 @@ This calendar module is functionally the same as the default calendar app, howev
 
 This module displays events from a public .ical calendar. It can combine multiple calendars.
 
+## Installation
+
+1. Navigate to the `MagicMirror/modules` directory.
+2. Execute `git clone https://github.com/jclarke0000/MMM-MyCalendar.git`
+3. Configure the module as per below
+4. Restart MagicMirror
+
 ## Using the module
 
 **NOTE: Some configuration parameters have changed.  See below if you are updating from a previous version.**
