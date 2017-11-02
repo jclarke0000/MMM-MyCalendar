@@ -253,12 +253,16 @@ Module.register("MMM-MyCalendar", {
 			} else {
 				if (event.startDate >= new Date()) {
 					if (event.startDate - now < 6 * oneDay) {
-						// This event is within the next 48 hours (2 days)
 						if (event.startDate - now < this.config.getRelative * oneHour) {
 							// If event is within 6 hour, display 'in xxx' time format or moment.fromNow()
 							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow());
-						} else {
-							// Otherwise just say 'Today/Tomorrow at such-n-such time'
+						} else if (event.startDate - now < 1 * oneDay) {
+							// This event is today
+							timeWrapper.innerHTML = this.capFirst(this.translate("TODAY")) + " " + this.config.joiningWord + " " + this.capFirst(moment(event.startDate, "x").format(this.config.timeFormat));
+						} else if (event.startDate - now < 2 * oneDay) {
+							// This event is tomorrow
+							timeWrapper.innerHTML = this.capFirst(this.translate("TOMORROW")) + " " + this.config.joiningWord + " " + this.capFirst(moment(event.startDate, "x").format(this.config.timeFormat));
+					  } else {
 							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").format(this.config.dayOfWeekFormat + " [" + this.config.joiningWord + "] " + this.config.timeFormat));
 						}
 					} else {
