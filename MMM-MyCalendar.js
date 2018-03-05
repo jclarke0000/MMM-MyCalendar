@@ -219,6 +219,8 @@ Module.register("MMM-MyCalendar", {
 			var timeWrapper = document.createElement("span");
 			//console.log(event.today);
 			var now = new Date();
+			var momentNow = moment();
+			var momentEventStart = moment(event.startDate, "x")
 			// Define second, minute, hour, and day variables
 			var oneSecond = 1000; // 1,000 milliseconds
 			var oneMinute = oneSecond * 60;
@@ -256,10 +258,9 @@ Module.register("MMM-MyCalendar", {
 						if (event.startDate - now < this.config.getRelative * oneHour) {
 							// If event is within 6 hour, display 'in xxx' time format or moment.fromNow()
 							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow());
-						} else if (event.startDate - now < 1 * oneDay) {
-							// This event is today
+						} else if (momentEventStart.isSame(momentNow, "day")) {
 							timeWrapper.innerHTML = this.capFirst(this.translate("TODAY")) + " " + this.config.joiningWord + " " + this.capFirst(moment(event.startDate, "x").format(this.config.timeFormat));
-						} else if (event.startDate - now < 2 * oneDay) {
+						} else if (momentEventStart.isSame(moment(momentNow).add(1, "day"), "day")) {
 							// This event is tomorrow
 							timeWrapper.innerHTML = this.capFirst(this.translate("TOMORROW")) + " " + this.config.joiningWord + " " + this.capFirst(moment(event.startDate, "x").format(this.config.timeFormat));
 					  } else {
@@ -274,7 +275,7 @@ Module.register("MMM-MyCalendar", {
 						 * Note: this needs to be put in its own function, as the whole thing repeats again verbatim
 						 */
 						if (!this.config.useRelativeDates) {
-							if ((this.config.urgency > 1) && (event.startDate - now < (this.config.urgency * oneDay))) {
+							if ((this.config.urgency > 1) && (momentEventStart.isSameOrBefore(moment(momentNow).add(this.config.urgency, "days")) )) {
 								// This event falls within the config.urgency period that the user has set
 								timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow());
 							} else {
