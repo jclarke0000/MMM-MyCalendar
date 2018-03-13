@@ -2,103 +2,85 @@
   max-width: 500px;
 }
 
-.MMM-MyCalendar .symbol {
-  padding-left: 0;
-  padding-right: 10px;
-  font-size: 80%;
+.MMM-MyCalendar * {
+  box-model: border-box;
 }
 
-.MMM-MyCalendar .symbol span {
-  display: inline-block;
-  -ms-transform: translate(0, 2px); /* IE 9 */
-  -webkit-transform: translate(0, 2px); /* Safari */
-  transform: translate(0, 2px);
-}
-
-.MMM-MyCalendar .title {
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.MMM-MyCalendar .time {
-  padding-left: 30px;
-  text-align: right;
-}
-
-
-.MMM-MyCalendar table {
-  table-layout: fixed;
-  border-collapse:collapse;
+.MMM-MyCalendar .calendar-events-list {
   width: 100%;
-}
-
-.MMM-MyCalendar table td {
-  line-height: 1.75;
-}
-
-.MMM-MyCalendar table tr {
-  border-bottom: solid 1px #222;
 }
 
 
 .MMM-MyCalendar .calendar-event {
+  display: block;
+  width: 100%;
   position: relative;
+  font-size: 20px;
+  line-height: 24px;
+  border-bottom: solid 1px #222;
+  padding: 4px 0;
 }
 
-.MMM-MyCalendar .title {
-  color: #FFF;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  display: block;
-  line-height: 1.25;
-  margin-top: 4px;
-}
-.MMM-MyCalendar .time {
-  color: #AAA;
-  white-space: nowrap;
-  display: block;  
-  font-size: 17px;
-  line-height: 1.5;
-  text-align: left;
-  padding-left: 0;
-  margin-bottom: 2px;
-  font-weight: 400;
-}
-
-.MMM-MyCalendar .calendar-event.with-symbol .title,
-.MMM-MyCalendar .calendar-event.with-symbol .time {  
-  margin-left: 30px;
-}
-
-
-.MMM-MyCalendar .symbol {
-  font-size: 14px;
-  display: block;
+.MMM-MyCalendar .calendar-event .event-icon {
   position: absolute;
-  top: 2px;
-  font-weight: bold;
-  text-align: center;
-  width: 24px;
-  height: 24px;
-  padding-top: 6px;
-}
-
-.MMM-MyCalendar .symbol span {
-  display: block;
-  font-size: 24px;
-  position: absolute;
-  top: 1px;
+  color: #FFFFFF;
+  top: 4px;
   left: 0px;
-  font-weight: normal;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
 }
 
-.MMM-MyCalendar .symbol .calendar-icon {
+.MMM-MyCalendar .calendar-event .event-icon .calendar-icon {
   width: 24px;
   height: 24px;
   position: absolute;
-  top: 3px;
+  top: 0px;
   left: 0px;
   fill: currentColor;
 }
+
+.MMM-MyCalendar .calendar-event .event-icon .date-number {
+  font-weight: bold;
+  font-size: 14px;
+  position: relative;
+  top: 1px;
+}
+
+.MMM-MyCalendar .calendar-event .title,
+.MMM-MyCalendar .calendar-event .time {
+  display: block;
+  padding-left: 32px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.MMM-MyCalendar .calendar-event .title {
+  color: #FFFFFF;
+  padding-top: 2px;
+}
+.MMM-MyCalendar .calendar-event .time {
+  font-size: 16px;
+}
+
+/** Column layout **/
+.MMM-MyCalendar .wrapper.with-columns .calendar-events-list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+  align-items: flex-start;
+}
+.MMM-MyCalendar .wrapper.with-columns .calendar-events-list .calendar-event {
+  width: 50%;
+}
+
+.MMM-MyCalendar .wrapper.with-columns .calendar-events-list .calendar-event .title {
+  padding-right: 10px;
+}
+
+
 

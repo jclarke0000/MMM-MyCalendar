@@ -1,0 +1,41 @@
+<div class="wrapper{% if columns %} with-columns{% endif %}">
+
+  {% if loading %}
+
+    <span class="small dimmed">{{ phrases.loading | safe }}</span>
+
+  {% else %}
+
+    <div class="calendar-events-list"
+      {% if (columns) and (events.length > 0) %}
+        style="height: {{ columnContainerHeight }}px"
+      {% endif %}
+      >
+      {% for event in events %}
+        <div class="calendar-event normal"
+          {% if (event.opacity) %}
+            style="opacity: {{ event.opacity | safe  }}"
+          {% endif %}
+          >
+          <span class="event-icon"
+            {% if (colored) and (event.color) %}
+              style="color: {{ event.color | safe }}"
+            {% endif %} >
+            <svg class="calendar-icon">
+              <use href="modules/MMM-MyCalendar/icon_sprite.svg#calendar" />
+            </svg>
+            <span class="date-number">{{ event.dateNumber }}</span>
+          </span>
+          <span class="title">{{ event.title }}</span>
+          <span class="time">{{ event.eventTime }}</span>
+        </div>
+      {% else %}
+        <span class="small dimmed no-events">{{ phrases.empty | safe }}</span>
+      {% endfor %}
+    </div>
+
+  {% endif %}
+  
+
+
+</div>

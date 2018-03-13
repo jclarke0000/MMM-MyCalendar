@@ -47,7 +47,7 @@ The following properties can be configured:
 | ---------------------------- | -----------
 | `maximumEntries`             | The maximum number of events shown. / **Possible values:** `0` - `100` <br> **Default value:** `10`
 | `maximumNumberOfDays`        | The maximum number of days in the future. <br><br> **Default value:** `365`
-| `maxTitleLength`             | The maximum title length. <br><br> **Possible values:** `10` - `50` <br> **Default value:** `25`
+| `maxTitleLength`             | DEPRECATED - CSS automatically truncates titles now based on available width - The maximum title length. <br><br> **Default value:** `500`
 | `fetchInterval`              | How often does the content needs to be fetched? (Milliseconds) <br><br> **Possible values:** `1000` - `86400000` <br> **Default value:** `300000` (5 minutes)
 | `animationSpeed`             | Speed of the update animation. (Milliseconds) <br><br> **Possible values:**`0` - `5000` <br> **Default value:** `2000` (2 seconds)
 | `fade`                       | Fade the future events to black. (Gradient) <br><br> **Possible values:** `true` or `false` <br> **Default value:** `true`
@@ -65,6 +65,8 @@ The following properties can be configured:
 | `broadcastEvents`            | If this property is set to true, the calendar will broadcast all the events to all other modules with the notification message: `CALENDAR_EVENTS`. The event objects are stored in an array and contain the following fields: `title`, `startDate`, `endDate`, `fullDayEvent`, `location` and `geo`. <br><br> **Possible values:** `true`, `false` <br><br> **Default value:** `true`
 | `hidePrivate`                | Hides private calendar events. <br><br> **Possible values:** `true` or `false` <br> **Default value:** `false`
 | `excludedEvents`             | An array of words / phrases from event titles that will be excluded from being shown. <br><br> **Example:** `['Birthday', 'Hide This Event']` <br> **Default value:** `[]`
+| `columns`                    | Whether to display the calendar events in two vertical columns instead of one.  Useful if you've allocated a wide area for the calendar. <br><br> **Possible values:** `true` or `false` <br> **Default value:** `false`
+| `eventHeight`                | The height in pixels of a single calendar entry.  You shouldn't need to set this unless you make css changes that alter the height of an entry.  It's needed only when `columns` is set to `true`. <br><br> **Default value:** `59`
 
 ### Calendar configuration
 
