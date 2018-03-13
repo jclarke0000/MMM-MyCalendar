@@ -78,6 +78,8 @@ Module.register("MMM-MyCalendar", {
       },
       events: this.formattedCalendarEvents
     };
+
+
   },
 
 
@@ -98,6 +100,7 @@ Module.register("MMM-MyCalendar", {
 
     //initialize formattedCalendarEvents array
     this.formattedCalendarEvents = [];
+    this.oldData = "";
 
     for (var c in this.config.calendars) {
       var calendar = this.config.calendars[c];
@@ -142,16 +145,24 @@ Module.register("MMM-MyCalendar", {
       Log.log("Calendar received an unknown socket notification: " + notification);
     }
 
-    this.formatCalendarEvents();
+    console.log("========== Update received =========");
 
-    this.updateDom(this.config.animationSpeed);
+    var newData = this.formatCalendarEvents();
+
+    if (newData.valueOf() !== this.oldData.valueOf()) {
+
+    	console.log("Data changed.  Updating DOM");
+
+      this.oldData = newData.valueOf();
+      this.updateDom(this.config.animationSpeed);
+    }
+
+
   },
 
   formatCalendarEvents: function () {
 
-    //reinitialize the view model array
-    this.formattedCalendarEvents = [];
-
+    var fEvents = new Array();
     var rawEvents = this.createEventList();
 
     for (var i = 0; i < rawEvents.length; i++) {
@@ -282,8 +293,12 @@ Module.register("MMM-MyCalendar", {
       }
 
       //add this event to the event array
-      this.formattedCalendarEvents.push(fEvent);
+      fEvents.push(fEvent);
     }
+
+    this.formattedCalendarEvents = fEvents;
+    return JSON.stringify(fEvents);
+
 
   },
 
@@ -467,4 +482,5 @@ Module.register("MMM-MyCalendar", {
     this.sendNotification("CALENDAR_EVENTS", eventList);
 
   }
+
 });
