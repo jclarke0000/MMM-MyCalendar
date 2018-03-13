@@ -151,7 +151,7 @@ Module.register("MMM-MyCalendar", {
 
     if (newData.valueOf() !== this.oldData.valueOf()) {
 
-    	console.log("Data changed.  Updating DOM");
+      console.log("Data changed.  Updating DOM");
 
       this.oldData = newData.valueOf();
       this.updateDom(this.config.animationSpeed);
@@ -359,6 +359,7 @@ Module.register("MMM-MyCalendar", {
   addCalendar: function (url, auth, calendarConfig) {
     this.sendSocketNotification("ADD_CALENDAR", {
       url: url,
+      excludedEvents: calendarConfig.excludedEvents || this.config.excludedEvents,
       maximumEntries: calendarConfig.maximumEntries || this.config.maximumEntries,
       maximumNumberOfDays: calendarConfig.maximumNumberOfDays || this.config.maximumNumberOfDays,
       fetchInterval: this.config.fetchInterval,
