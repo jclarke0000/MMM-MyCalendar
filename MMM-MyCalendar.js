@@ -12,6 +12,9 @@
 
 Module.register("MMM-MyCalendar", {
 
+  //Now using Nunjucks template engine, which is supported from MM 2.2.0 onward.
+  requiresVersion: "2.2.0",
+
   // Define module defaults
   defaults: {
     maximumEntries: 10, // Total Maximum Entries
