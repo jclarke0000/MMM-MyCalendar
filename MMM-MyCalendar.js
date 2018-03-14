@@ -145,13 +145,13 @@ Module.register("MMM-MyCalendar", {
       Log.log("Calendar received an unknown socket notification: " + notification);
     }
 
-    console.log("========== Update received =========");
+    // console.log("========== Update received =========");
 
     var newData = this.formatCalendarEvents();
 
     if (newData.valueOf() !== this.oldData.valueOf()) {
 
-      console.log("Data changed.  Updating DOM");
+      // console.log("Data changed.  Updating DOM");
 
       this.oldData = newData.valueOf();
       this.updateDom(this.config.animationSpeed);
