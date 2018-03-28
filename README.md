@@ -67,6 +67,7 @@ The following properties can be configured:
 | `excludedEvents`             | An array of words / phrases from event titles that will be excluded from being shown. <br><br> **Example:** `['Birthday', 'Hide This Event']` <br> **Default value:** `[]`
 | `columns`                    | Whether to display the calendar events in two vertical columns instead of one.  Useful if you've allocated a wide area for the calendar. <br><br> **Possible values:** `true` or `false` <br> **Default value:** `false`
 | `eventHeight`                | The height in pixels of a single calendar entry.  You shouldn't need to set this unless you make css changes that alter the height of an entry.  It's needed only when `columns` is set to `true`. <br><br> **Default value:** `59`
+| `showLocation`               | Whether to show the event's location. <br><br> **Possible values:** `true` or `false`.<br><br> **Default value:** `true`
 
 ### Calendar configuration
 

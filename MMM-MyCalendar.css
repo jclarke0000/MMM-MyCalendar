@@ -49,7 +49,8 @@
 }
 
 .MMM-MyCalendar .calendar-event .title,
-.MMM-MyCalendar .calendar-event .time {
+.MMM-MyCalendar .calendar-event .time,
+.MMM-MyCalendar .calendar-event .location {
   display: block;
   padding-left: 32px;
   white-space: nowrap;
@@ -61,7 +62,8 @@
   color: #FFFFFF;
   padding-top: 2px;
 }
-.MMM-MyCalendar .calendar-event .time {
+.MMM-MyCalendar .calendar-event .time,
+.MMM-MyCalendar .calendar-event .location {
   font-size: 16px;
 }
 

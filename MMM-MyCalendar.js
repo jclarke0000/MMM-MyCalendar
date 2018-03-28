@@ -50,7 +50,8 @@ Module.register("MMM-MyCalendar", {
       "'s birthday": ""
     },
     broadcastEvents: true,
-    excludedEvents: []
+    excludedEvents: [],
+    showLocation: true
   },
 
   // Define required scripts.
@@ -201,6 +202,9 @@ Module.register("MMM-MyCalendar", {
       }
 
       fEvent.title = this.titleTransform(event.title) + repeatingCountTitle;
+      if (event.location && this.config.showLocation) { 
+        fEvent.location = event.location;
+      }
 
       //console.log(event.today);
       var now = new Date();
@@ -350,6 +354,7 @@ Module.register("MMM-MyCalendar", {
     events.sort(function (a, b) {
       return a.startDate - b.startDate;
     });
+
 
     return events.slice(0, this.config.maximumEntries);
   },
