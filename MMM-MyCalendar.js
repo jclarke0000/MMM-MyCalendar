@@ -128,9 +128,13 @@ Module.register("MMM-MyCalendar", {
 		wrapper.className = "small";
 
 		if (events.length === 0) {
-			wrapper.innerHTML = (this.loaded) ? this.translate("EMPTY") : this.translate("LOADING");
-			wrapper.className = "small dimmed";
-			return wrapper;
+			if (this.config.hideWhenEmpty) {
+				return null;
+			} else {
+				wrapper.innerHTML = (this.loaded) ? this.translate("EMPTY") : this.translate("LOADING");
+				wrapper.className = "small dimmed";
+				return wrapper;
+			}
 		}
 
 		for (var e in events) {

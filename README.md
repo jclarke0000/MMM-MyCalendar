@@ -66,6 +66,7 @@ The following properties can be configured:
 | `hidePrivate`                | Hides private calendar events. <br><br> **Possible values:** `true` or `false` <br> **Default value:** `false`
 | `excludedEvents`             | An array of words / phrases from event titles that will be excluded from being shown. <br><br> **Example:** `['Birthday', 'Hide This Event']` <br> **Default value:** `[]`
 | `showLocation`               | Whether to show the event's location. <br><br> **Possible values:** `true` or `false`.<br> **Default value:** `true`
+| `hideWhenEmpty`              | Whether to show the calendar if no events exist (respects maximumNumberOfDays). <br><br> **Possible values:** `true` or `false`.<br> **Default value:** `false`
 
 ### Calendar configuration
 
@@ -76,6 +77,7 @@ The `colored` property gives the option for an individual color for each calenda
 ````javascript
 config: {
 	colored: false,
+	hideWhenEmpty: false,
 	calendars: [
 		{
 			url: 'http://www.calendarlabs.com/templates/ical/US-Holidays.ics',
