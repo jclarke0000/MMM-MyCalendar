@@ -1,0 +1,22 @@
+{
+  "name": "mmm-mycalendar",
+  "version": "2.2.0",
+  "description": "This calendar module is functionally the same as the default calendar app, however its presentation is different.",
+  "main": "MMM-MyCalendar.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jclarke0000/MMM-MyCalendar.git"
+  },
+  "author": "Jeff Clarke",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/jclarke0000/MMM-MyCalendar/issues"
+  },
+  "homepage": "https://github.com/jclarke0000/MMM-MyCalendar#readme",
+  "dependencies": {
+    "valid-url": "^1.0.9"
+  }
+}
