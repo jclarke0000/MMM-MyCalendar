@@ -54,7 +54,8 @@
   line-height: 1.25;
   margin-top: 4px;
 }
-.MMM-MyCalendar .time {
+.MMM-MyCalendar .time,
+.MMM-MyCalendar .location {
   color: #AAA;
   white-space: nowrap;
   display: block;  
@@ -64,10 +65,13 @@
   padding-left: 0;
   margin-bottom: 2px;
   font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .MMM-MyCalendar .calendar-event.with-symbol .title,
-.MMM-MyCalendar .calendar-event.with-symbol .time {  
+.MMM-MyCalendar .calendar-event.with-symbol .time,
+.MMM-MyCalendar .calendar-event.with-symbol .location {  
   margin-left: 30px;
 }
 

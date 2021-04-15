@@ -8,7 +8,7 @@
 var ical = require("./vendor/ical.js");
 var moment = require("moment");
 
-var CalendarFetcher = function(url, reloadInterval, maximumEntries, maximumNumberOfDays, auth) {
+var CalendarFetcher = function(url, reloadInterval, excludedEvents, maximumEntries, maximumNumberOfDays, auth) {
 	var self = this;
 
 	var reloadTimer = null;
@@ -113,6 +113,19 @@ var CalendarFetcher = function(url, reloadInterval, maximumEntries, maximumNumbe
 						title = event.description;
 					}
 
+					var excluded = false;
+					for (var f in excludedEvents) {
+						var filter = excludedEvents[f];
+						if (title.toLowerCase().includes(filter.toLowerCase())) {
+							excluded = true;
+							break;
+						}
+					}
+
+					if (excluded) {
+						continue;
+					}
+
 					var location = event.location || false;
 					var geo = event.geo || false;
 					var description = event.description || false;
@@ -144,17 +157,17 @@ var CalendarFetcher = function(url, reloadInterval, maximumEntries, maximumNumbe
 						var fullDayEvent = (isFacebookBirthday) ? true : isFullDayEvent(event);
 
 						if (!fullDayEvent && endDate < new Date()) {
-							//console.log("It's not a fullday event, and it is in the past. So skip: " + title);
+							// console.log("It's not a fullday event, and it is in the past. So skip: " + title);
 							continue;
 						}
 
 						if (fullDayEvent && endDate <= today) {
-							//console.log("It's a fullday event, and it is before today. So skip: " + title);
+							// console.log("It's a fullday event, and it is before today. So skip: " + title);
 							continue;
 						}
 
 						if (startDate > future) {
-							//console.log("It exceeds the maximumNumberOfDays limit. So skip: " + title);
+							// console.log("It exceeds the maximumNumberOfDays limit. So skip: " + title);
 							continue;
 						}
 
@@ -179,7 +192,7 @@ var CalendarFetcher = function(url, reloadInterval, maximumEntries, maximumNumbe
 				return a.startDate - b.startDate;
 			});
 
-			//console.log(newEvents);
+			// console.log(newEvents);
 
 			events = newEvents.slice(0, maximumEntries);
 
@@ -207,6 +220,8 @@ var CalendarFetcher = function(url, reloadInterval, maximumEntries, maximumNumbe
 	 * return bool - The event is a fullday event.
 	 */
 	var isFullDayEvent = function(event) {
+
+
 		if (event.start.length === 8) {
 			return true;
 		}
@@ -214,6 +229,7 @@ var CalendarFetcher = function(url, reloadInterval, maximumEntries, maximumNumbe
 		var start = event.start || 0;
 		var startDate = new Date(start);
 		var end = event.end || 0;
+
 
 		if (end - start === 24 * 60 * 60 * 1000 && startDate.getHours() === 0 && startDate.getMinutes() === 0) {
 			// Is 24 hours, and starts on the middle of the night.

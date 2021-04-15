@@ -45,7 +45,8 @@ Module.register("MMM-MyCalendar", {
 			"'s birthday": ""
 		},
 		broadcastEvents: true,
-		excludedEvents: []
+		excludedEvents: [],
+    showLocation: true
 	},
 
 	// Define required scripts.
@@ -293,6 +294,13 @@ Module.register("MMM-MyCalendar", {
 			timeWrapper.className = "time light";
 
 			eventWrapper.appendChild(timeWrapper);
+
+      if (event.location && this.config.showLocation) { 
+        var locationWrapper = document.createElement("span");
+        locationWrapper.classList.add("location");
+        locationWrapper.innerHTML = event.location;
+        eventWrapper.appendChild(locationWrapper);
+      }
 
       var eventWrapperOuter = document.createElement("tr");
       eventWrapperOuter.appendChild(eventWrapper)
