@@ -8,8 +8,6 @@ const CalendarUtils = require("./calendarutils");
 const Log = require("logger");
 const NodeHelper = require("node_helper");
 const ical = require("node-ical");
-const fetch = require("fetch");
-const digest = require("digest-fetch");
 const https = require("https");
 
 /**
@@ -38,10 +36,9 @@ const CalendarFetcher = function (url, reloadInterval, excludedEvents, maximumEn
 		clearTimeout(reloadTimer);
 		reloadTimer = null;
 		const nodeVersion = Number(process.version.match(/^v(\d+\.\d+)/)[1]);
-		let fetcher = null;
 		let httpsAgent = null;
 		let headers = {
-			"User-Agent": "Mozilla/5.0 (Node.js " + nodeVersion + ") MagicMirror/" + global.version
+			"User-Agent": `Mozilla/5.0 (Node.js ${nodeVersion}) MagicMirror/${global.version}`
 		};
 
 		if (selfSignedCert) {
@@ -51,18 +48,13 @@ const CalendarFetcher = function (url, reloadInterval, excludedEvents, maximumEn
 		}
 		if (auth) {
 			if (auth.method === "bearer") {
-				headers.Authorization = "Bearer " + auth.pass;
-			} else if (auth.method === "digest") {
-				fetcher = new digest(auth.user, auth.pass).fetch(url, { headers: headers, agent: httpsAgent });
+				headers.Authorization = `Bearer ${auth.pass}`;
 			} else {
-				headers.Authorization = "Basic " + Buffer.from(auth.user + ":" + auth.pass).toString("base64");
+				headers.Authorization = `Basic ${Buffer.from(`${auth.user}:${auth.pass}`).toString("base64")}`;
 			}
 		}
-		if (fetcher === null) {
-			fetcher = fetch(url, { headers: headers, agent: httpsAgent });
-		}
 
-		fetcher
+		fetch(url, { headers: headers, agent: httpsAgent })
 			.then(NodeHelper.checkFetchStatus)
 			.then((response) => response.text())
 			.then((responseData) => {
@@ -70,7 +62,7 @@ const CalendarFetcher = function (url, reloadInterval, excludedEvents, maximumEn
 
 				try {
 					data = ical.parseICS(responseData);
-					Log.debug("parsed data=" + JSON.stringify(data));
+					Log.debug(`parsed data=${JSON.stringify(data)}`);
 					events = CalendarUtils.filterEvents(data, {
 						excludedEvents,
 						includePastEvents,
