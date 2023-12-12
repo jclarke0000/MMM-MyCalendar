@@ -7,7 +7,7 @@ This module displays events from a public .ical calendar. It can combine multipl
 ## Installation
 
 1. Navigate to the `MagicMirror/modules` directory.
-2. Execute `git clone https://github.com/jclarke0000/MMM-MyCalendar.git`
+2. Execute `git clone https://github.com/dbeltjr/MMM-MyCalendar.git`
 3. Configure the module as per below
 4. Restart MagicMirror
 
